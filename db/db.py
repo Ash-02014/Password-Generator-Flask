@@ -19,9 +19,8 @@ class DB:
         return res
 
     def check_db(self, password: str) -> bool:
-        res = self.read_data()
-        s = [pwd[0] for pwd in res if pwd[0] == password]
-        if s:
+        result = self.cur.execute("SELECT * FROM psd where pass = ?", (password))
+        if result:
             return True
         return False
     
